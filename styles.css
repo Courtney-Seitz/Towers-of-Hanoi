@@ -1,0 +1,13 @@
+div .disk {
+  /*static height for all disks*/
+  height: 20px;
+  /* width of starting black = 30px; each succeeding block has ~10px added to l/r side*/
+  width: 30px;
+  /*placeholder margin pending further styling*/
+  margin: 10px 0;
+
+  /*starting tower color: second and third towers receive blue / green respectively*/
+  background: red;
+}
+
+div .peg{}
