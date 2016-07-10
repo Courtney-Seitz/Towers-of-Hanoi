@@ -9,9 +9,8 @@ object "board", which has properties / methods:
     -- isLegalMove
 - disks of "n" number and "k" colors (1 <= k <= 3 )
     disks have properties / methods:
-    - number/magnitude/order (n)
-    - color (k)
-    - data-type (color) (value to compare whether disks are a "match" for isSolved condition)
+    - number/magnitude/order (n) (for isLegalMove comparison; effects css width)
+    - color (k) (for isSolved comparison; effects css color)
     - methods:
     -- selectDisk
     -- moveTo
@@ -20,6 +19,7 @@ object "board", which has properties / methods:
 - methods:
 -- generateGame
 --- generateDisks (generates a set of disks with incrementally increasing width for each color and sets their initial configuration on the board (i.e. @ position 2))
+
 ---- getNumberColors(user input)
 ---- getNumberDisks(user input)
 
@@ -28,14 +28,17 @@ create n Disks
   when k Disks have been created, move to next magnitude disk (i.e. increase magnitude by 1)
   as each Disk is created, place it at the bottom of the starting position (i.e end of array)
 
+
   for each Disk:
     for each Color:
-      give it a value of (current color)
+      give it a value of "current color"
+        cycle through k Colors (i%k)
+          when k Colors have been cycled through (i.e. when i%k == 0), move to next (i.e. increase) value
       give it a value of (number/order/magnitude)
-        from a starting width, increase width incrementally as value increases
+        increase width incrementally as value increases
       <!-- should create "k" Disks of each magnitude before moving to the next order -->
-    place it on bottom of the starting position (i.e. position 2)
-    should end with pyramid of n*k disks in decreasing order of width and with
+    place it on bottom (i.e. end of array) of the starting position (i.e. position 2)
+    <!-- should end with pyramid of n*k disks in decreasing order of width and with -->
 
 
 -- isSolved
