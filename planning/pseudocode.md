@@ -5,7 +5,13 @@ object "board", which has properties / methods:
 - methods:
 -- isSolved
 
-    for each position: if all disks @ current position have the same color (should also be in legal order, thanks to isLegalMove), then game is solved
+  for k (number of colors) == 1:
+
+    if n (i.e. all) disks at either position other than starting one (i.e. 1 or 3, but not 2) (should also be in legal order, thanks to isLegalMove) then game is solved
+
+  for k >= 2:
+
+    if either n or 0 disks at each position; and if all disks @ current position have the same color (should also be in legal order, thanks to isLegalMove), then game is solved
 
 -- moveCompleted (counter makes sure user makes two selections, then resets listeners)
 
