@@ -1,12 +1,12 @@
 console.log('javascript linked broh');
 
 $(document).on("ready", function(){
-  
+
   var tower {
     // placeholder attributes
     number: 5;
     color: red;
-
+    
     // asks user how many towers to play with and generates
     function generateTower(){
       var numDisks = prompt("how many towers?")
@@ -19,8 +19,6 @@ $(document).on("ready", function(){
         $('#first').append("<div class = disk></div>");
       }
     }
-
-
   }
 
 
