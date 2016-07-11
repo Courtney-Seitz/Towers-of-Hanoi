@@ -1,11 +1,17 @@
 div .disk {
-  /*static height for all disks*/
   height: 20px;
-  /* width of starting black = 30px; each succeeding block has ~10px added to l/r side*/
-  width: 30px;
-  /*placeholder margin pending further styling*/
-  margin: 10px 0;
+  margin: 10px;
+}
 
-  /*starting tower color: second and third towers receive blue / green respectively*/
-  background: red;
+div .board {
+  width: 400px;
+  margin: 0 auto;
+  height: 200px;
+  border: 2px solid black;
+  background-color: green;
+}
+
+div .peg {
+  margin-top: 100px;
+  float: left;
 }

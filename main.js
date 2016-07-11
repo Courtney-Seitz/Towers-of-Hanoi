@@ -13,36 +13,40 @@ var board = {
   selection : null,
   destination : null,
 
+  selectNum: null,
+  destNum: null,
+
   getMove: function(evt){
     if (board.moveCounter == 0) {
       if (event.which == 49){
-        // board.moveFrom = $('#first div:first');
-        board.selection = ($('#first div:first')).attr('id');
+        board.selection = $('#first div:first');
+        board.selectNum = board.selection.attr('id');
       } if (event.which == 50){
-        // board.moveFrom = $('#second div:first');
-        board.selection = ($('#second div:first')).attr('id');
+        board.selection = $('#second div:first');
+        board.selectNum = board.selection.attr('id');
       } if (event.which == 51){
-        // board.moveFrom = $('#third div:first');
-        board.selection = ($('#third div:first')).attr('id');
-      } if (event.which != 49 || 50 || 51){
+        board.selection = $('#third div:first');
+        board.selectNum = board.selection.attr('id');
+      } if (event.which < 49 || event.which > 51){
         board.selection = null;
+        board.selectNum = null;
       }
-      board.moveCounter++;
     }
 
     else {
       if (event.which == 49){
-        // board.moveTo = $('#first div:first');
-        board.destination = ($('#first div:first')).attr('id');
+        board.destination = $('#first');
+        board.destNum = $('#first div:first').attr('id');
       } if (event.which == 50){
-        // board.moveTo = $('#second div:first');
-        board.destination = ($('#second div:first')).attr('id');
+        board.destination = $('#second');
+        board.destNum = $('#second div:first').attr('id');
       } if (event.which == 51){
-        // board.moveTo = $('#third div:first');
-        board.destination = ($('#third div:first')).attr('id');
+        board.destination = $('#third');
+        board.destNum = $('#third div:first').attr('id');
       }
-      board.moveCounter++;
     }
+
+    board.moveCounter++;
 
     if (board.moveCounter == 2){
       board.checkLegalMove();
@@ -51,16 +55,20 @@ var board = {
   },
 
   checkLegalMove: function(){
-    if (board.selection && (board.selection <= board.destination) || !board.destination){
+    console.log(board.selectNum);
+    console.log(board.destNum);
+    if ((!board.selectNum)  || (board.selectNum > board.destNum)){
+      console.log('illegal move')
+    } else {
       console.log('legal move')
       board.completeMove();
-    } else {
-      console.log('illegal move')
     }
   },
 
   completeMove: function(){
-    console.log('ready complete move');
+
+    board.selection.prependTo(board.destination);
+    console.log ('move completed')
   },
 
   disk: {
