@@ -7,7 +7,7 @@ object "board", which has properties / methods:
 
   --- for k (number of colors) == 1:
 
-    ---- if n (i.e. all) disks at either position other than starting one (i.e. 1 or 3, but not 2) (should also be in legal order, thanks to isLegalMove) then game is solved
+    ---- if n (i.e. all) disks at either position other than starting one (i.e. 2 or 3, but not 1) (should also be in legal order, thanks to isLegalMove) then game is solved
 
   --- for k >= 2:
 
@@ -18,14 +18,14 @@ object "board", which has properties / methods:
     --- each selection event increases a counter; when the counter == 2, reset to 0 (i.e. move is completed)
 
 -- generateGame:
---- generateDisks (generates a set of disks for each color with incrementally increasing width and sets their initial configuration on the board (i.e. all @ position 2))
+--- generateDisks (generates a set of disks for each color with incrementally increasing width and sets their initial configuration on the board (i.e. all @ position 1))
 
     ---- from user input (getNumberColors and getNumberDisks), creates n disks each of k colors, placing each at the bottom of the starting position as they are created
 
     // abstract
     ----- create n Disks
-      ------ for each number Disk, create k of that magnitude, one for each color
-      ------ when k Disks have been created, move to next magnitude disk (i.e. increase magnitude by 1)
+      ------ for each number Disk, create k of that value, one for each color
+      ------ when k Disks have been created, move to next value disk (i.e. increase value by 1)
       ------ as each Disk is created, place it at the bottom of the starting position (i.e end of array)
 
     // more specific
@@ -34,10 +34,10 @@ object "board", which has properties / methods:
           ------- give it a value of "current color"
             -------- cycle through k Colors (i%k)
               --------- when k Colors have been cycled through (i.e. when i%k == 0), move to next (i.e. increase) value
-          ------- give it a value of (number/order/magnitude)
+          ------- give it a value of (current counter value)
             -------- increase width incrementally as value increases
-          <!-- should create "k" Disks of each magnitude before moving to the next order -->
-      ----- place it on bottom (i.e. end of array) of the starting position (i.e. position 2)
+          <!-- should create "k" Disks of each value before moving to the next order -->
+      ----- place it on bottom (i.e. end of array) of the starting position (i.e. position 1)
         <!-- should end with pyramid of n*k disks in decreasing order of width and with -->
 
 
@@ -52,14 +52,14 @@ object "board", which has properties / methods:
 
     --- isLegalMove
 
-    ---- compares magnitude of currentTopDisk of first selection (i.e. disk to be moved) to magnitude of currentTopDisk of second selection (i.e. destination)
+    ---- compares value of currentTopDisk of first selection (i.e. disk to be moved) to value of currentTopDisk of second selection (i.e. destination)
       ----- if first <= second, returns true and move is allowed to proceed
       ----- if first > second, returns false, move does not proceed and user is notified of illegal move
 
 - disks of (user input) "n" number and "k" (user input) colors (1 <= k <= 3 )
 - disks have properties / methods:
 
-    -- number/magnitude/order (n) (for isLegalMove comparison; effects css width)
+    -- value (n) (for isLegalMove comparison; effects css width)
     -- color (k) (for isSolved comparison; effects css color)
 
     -- methods:
