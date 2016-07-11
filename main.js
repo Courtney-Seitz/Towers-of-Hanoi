@@ -12,7 +12,7 @@ var board = {
 
   disk: {
     // to be defined on board creation
-    value: null,
+    magnitude: null,
     // to be defined on board creation
     color: null,
 
@@ -30,8 +30,8 @@ var board = {
     currentDisks: [],
 
     // returns top disk at a given position
-    currentTopDisk: function(position){
-      return position.currentDisks[0];
+    currentTopDisk: function(){
+      return peg.currentDisks[0];
     },
 
     // compares magnitude of currentTopDisk of first selection (i.e. disk to be moved) to magnitude of currentTopDisk of second selection (i.e. destination)
@@ -47,7 +47,9 @@ var board = {
   },
 
   generateGame: function() {
+    var diskWidth = 25;
     for (i=1; i<=board.numberDisks; i++){
+      diskWidth += 10;
       for (a=0; a<board.numberColors; a++){
         var currentColor;
         if (a == 0){
@@ -57,14 +59,16 @@ var board = {
         } if (a == 2){
           currentColor = 'green';
         }
+
         var newDisk = board.disk;
-        newDisk.value = i;
-        newDisk.color = currentColor
-        console.log(newDisk);
-        board.peg.currentDisks.push(newDisk);
+        newDisk.magnitude = i;
+        newDisk.color = currentColor;
+
+        var newDiv = '<div class = \'disk\' id = \'' + newDisk.magnitude + '\'></div>';
+        $('#first').append(newDiv);
+        $('#first div:last').css({"background-color" : newDisk.color, "width" : diskWidth});
       }
     }
-    console.log(board.peg);
   },
 
   moveCompleted: function() {
