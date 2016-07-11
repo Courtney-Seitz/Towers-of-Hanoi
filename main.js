@@ -1,8 +1,9 @@
 var board = {
   //
   solved: false,
-  // numberPegs hardwired at 3 (Gold objective: user defined)
-  numberPegs: 3,
+
+
+
   // numberDisks user defined
   numberDisks: null,
   // numberColors user defined
@@ -15,6 +16,8 @@ var board = {
 
   selectNum: null,
   destNum: null,
+
+
 
   getMove: function(evt){
     if (board.moveCounter == 0) {
@@ -55,20 +58,21 @@ var board = {
   },
 
   checkLegalMove: function(){
-    console.log(board.selectNum);
-    console.log(board.destNum);
+    // console.log(board.selectNum);
+    // console.log(board.destNum);
     if ((!board.selectNum)  || (board.selectNum > board.destNum)){
-      console.log('illegal move')
+      // console.log('illegal move')
     } else {
-      console.log('legal move')
+      // console.log('legal move')
       board.completeMove();
     }
   },
 
   completeMove: function(){
 
+    board.selection.css("position : absolute, bottom : 140px");
     board.selection.prependTo(board.destination);
-    console.log ('move completed')
+    // console.log ('move completed')
   },
 
   disk: {
