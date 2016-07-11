@@ -10,6 +10,59 @@ var board = {
   // increments with first and second selection, then resets
   moveCounter: 0,
 
+  selection : null,
+  destination : null,
+
+  getMove: function(evt){
+    if (board.moveCounter == 0) {
+      if (event.which == 49){
+        // board.moveFrom = $('#first div:first');
+        board.selection = ($('#first div:first')).attr('id');
+      } if (event.which == 50){
+        // board.moveFrom = $('#second div:first');
+        board.selection = ($('#second div:first')).attr('id');
+      } if (event.which == 51){
+        // board.moveFrom = $('#third div:first');
+        board.selection = ($('#third div:first')).attr('id');
+      } if (event.which != 49 || 50 || 51){
+        board.selection = null;
+      }
+      board.moveCounter++;
+    }
+
+    else {
+      if (event.which == 49){
+        // board.moveTo = $('#first div:first');
+        board.destination = ($('#first div:first')).attr('id');
+      } if (event.which == 50){
+        // board.moveTo = $('#second div:first');
+        board.destination = ($('#second div:first')).attr('id');
+      } if (event.which == 51){
+        // board.moveTo = $('#third div:first');
+        board.destination = ($('#third div:first')).attr('id');
+      }
+      board.moveCounter++;
+    }
+
+    if (board.moveCounter == 2){
+      board.checkLegalMove();
+      board.moveCounter = 0;
+    }
+  },
+
+  checkLegalMove: function(){
+    if (board.selection && (board.selection <= board.destination) || !board.destination){
+      console.log('legal move')
+      board.completeMove();
+    } else {
+      console.log('illegal move')
+    }
+  },
+
+  completeMove: function(){
+    console.log('ready complete move');
+  },
+
   disk: {
     // to be defined on board creation
     magnitude: null,
@@ -30,9 +83,9 @@ var board = {
     currentDisks: [],
 
     // returns top disk at a given position
-    currentTopDisk: function(){
-      return peg.currentDisks[0];
-    },
+    // currentTopDisk: function(){
+    //   return $('div:first');
+    // },
 
     // compares magnitude of currentTopDisk of first selection (i.e. disk to be moved) to magnitude of currentTopDisk of second selection (i.e. destination)
     isLegalMove: function(position1, postion2){
@@ -59,6 +112,11 @@ var board = {
         } if (a == 2){
           currentColor = 'green';
         }
+        // if (a == 3){
+        //   currentColor = 'brown';
+        // } if (a == 4){
+        //   currentColor = 'orange';
+        // }
 
         var newDisk = board.disk;
         newDisk.magnitude = i;
@@ -70,14 +128,15 @@ var board = {
       }
     }
   },
-
-  moveCompleted: function() {
-
-  },
 };
 
 $(document).on("ready", function(){
   board.numberDisks = prompt("how many disks?");
   board.numberColors = prompt("how many colors?");
   board.generateGame();
+
+  $('body').on('keyup', function(event){
+    board.getMove(event);
+  });
+
 })
