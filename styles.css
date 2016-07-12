@@ -3,21 +3,8 @@ div .disk {
   margin: 10px;
 }
 
-.board {
-  /*height: 1000px;
-  width: 500px;
-  margin-top: 100px;*/
-  display: flex;
-  flex-direction: row;
-}
-
 .peg {
   margin-top: 100px;
-  /*float: left;*/
+  float: left;
   width: 150px;
-}
-
-.peg div {
-  position: relative;;
-  bottom: 100px;
 }

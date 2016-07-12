@@ -13,7 +13,7 @@ var board = {
   selectNum: null,
   destNum: null,
 
-
+  diskPositionY: 400,
 
   getMove: function(evt){
     if (board.moveCounter == 0) {
@@ -68,6 +68,9 @@ var board = {
 
     // board.selection.css("position : absolute, bottom : 140px");
     board.selection.prependTo(board.destination);
+    var count = board.destination.children().length;
+    var moveToY = board.diskPositionY + ((count - 1) * 30);
+    board.selection.css({"position" : "absolute", "bottom" : moveToY});
     // console.log ('move completed')
   },
 
@@ -83,6 +86,7 @@ var board = {
     for (i=1; i<=board.numberDisks; i++){
       diskWidth += 10;
       for (a=0; a<board.numberColors; a++){
+        board.diskPositionY -= 30;
         var currentColor;
         if (a == 0){
           currentColor = 'red';
@@ -103,7 +107,7 @@ var board = {
 
         var newDiv = '<div class = \'disk\' id = \'' + newDisk.magnitude + '\'></div>';
         $('#first').append(newDiv);
-        $('#first div:last').css({"background-color" : newDisk.color, "width" : diskWidth});
+        $('#first div:last').css({"background-color" : newDisk.color, "width" : diskWidth, "position" : "absolute", "bottom" : board.diskPositionY});
       }
     }
   },
