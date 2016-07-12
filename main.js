@@ -13,7 +13,7 @@ var board = {
   selectNum: null,
   destNum: null,
 
-  diskPositionY: 300,
+  diskPositionY: null,
 
   getMove: function(evt){
     if (board.moveCounter == 0) {
@@ -46,7 +46,9 @@ var board = {
       }
     }
 
-    board.moveCounter++;
+    if(board.selectNum > 0){
+      board.moveCounter++;
+    }
 
     if (board.moveCounter == 2){
       board.checkLegalMove();
@@ -69,12 +71,10 @@ var board = {
 
   completeMove: function(){
 
-    // board.selection.css("position : absolute, bottom : 140px");
     board.selection.prependTo(board.destination);
     var count = board.destination.children().length;
     var moveToY = board.diskPositionY + ((count - 1) * 30);
-    board.selection.css({"position" : "absolute", "bottom" : moveToY});
-    // console.log ('move completed')
+    board.selection.css({"position" : "fixed", "bottom" : moveToY});
   },
 
   disk: {
@@ -88,6 +88,8 @@ var board = {
     // board.numberDisks = $('#disks').val();
     // board.numberColors = $('#colors').val();
     var diskWidth = 40;
+    var startPositionY = board.numberDisks * board.numberColors * 30 + 10;
+    board.diskPositionY = startPositionY
     for (i=1; i<=board.numberDisks; i++){
       diskWidth += 15;
       for (a=0; a<board.numberColors; a++){
@@ -112,16 +114,16 @@ var board = {
 
         var newDiv = '<div class = \'disk\' id = \'' + newDisk.magnitude + '\'></div>';
         $('#first').append(newDiv);
-        $('#first div:last').css({"background-color" : newDisk.color, "width" : diskWidth, "position" : "absolute", "bottom" : board.diskPositionY});
+        $('#first div:last').css({"background-color" : newDisk.color, "width" : diskWidth, "position" : "fixed", "bottom" : board.diskPositionY});
       }
     }
   },
 
-//   clearGame: function(){
-//     $('.peg div').remove();
-//     board.diskPositionY = 300;
-//   }
-// };
+  //   clearGame: function(){
+  //     $('.peg div').remove();
+  //     board.diskPositionY = 300;
+  //   }
+  // };
 
 }
 
