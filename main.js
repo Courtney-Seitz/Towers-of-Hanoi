@@ -13,7 +13,7 @@ var board = {
   selectNum: null,
   destNum: null,
 
-  diskPositionY: 400,
+  diskPositionY: 300,
 
   getMove: function(evt){
     if (board.moveCounter == 0) {
@@ -30,6 +30,7 @@ var board = {
         board.selection = null;
         board.selectNum = null;
       }
+      board.selection.css("opacity", "0.4")
     }
 
     else {
@@ -50,6 +51,7 @@ var board = {
     if (board.moveCounter == 2){
       board.checkLegalMove();
       board.moveCounter = 0;
+      board.selection.css("opacity", "1.0");
     }
   },
 
@@ -60,6 +62,7 @@ var board = {
       // console.log('illegal move')
     } else {
       // console.log('legal move')
+
       board.completeMove();
     }
   },
@@ -82,9 +85,11 @@ var board = {
   },
 
   generateGame: function() {
-    var diskWidth = 25;
+    // board.numberDisks = $('#disks').val();
+    // board.numberColors = $('#colors').val();
+    var diskWidth = 40;
     for (i=1; i<=board.numberDisks; i++){
-      diskWidth += 10;
+      diskWidth += 15;
       for (a=0; a<board.numberColors; a++){
         board.diskPositionY -= 30;
         var currentColor;
@@ -111,12 +116,25 @@ var board = {
       }
     }
   },
-};
+
+//   clearGame: function(){
+//     $('.peg div').remove();
+//     board.diskPositionY = 300;
+//   }
+// };
+
+}
 
 $(document).on("ready", function(){
+
   board.numberDisks = prompt("how many disks?");
-  board.numberColors = prompt("how many colors?");
+  board.numberColors = prompt('how many colors?');
   board.generateGame();
+
+  // $('select').on('change', function(){
+  //   board.clearGame();
+  //   board.generateGame();
+  // })
 
   $('body').on('keyup', function(event){
     board.getMove(event);
