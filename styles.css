@@ -2,6 +2,11 @@ body {
   text-align: center;
 }
 
+h5 {
+  visibility: hidden;
+  color: red;
+}
+
 div .disk {
   height: 20px;
   margin: 0 auto;
@@ -17,6 +22,7 @@ div .disk {
 .peg {
   /*margin-top: 100px;*/
   float: left;
+  margin-left: 200px;
   width: 150px;
   height: 310px;
   /*border-bottom: 5px solid black;*/
