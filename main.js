@@ -1,8 +1,4 @@
 var board = {
-  //
-  solved: false,
-
-
 
   // numberDisks user defined
   numberDisks: null,
@@ -70,7 +66,7 @@ var board = {
 
   completeMove: function(){
 
-    board.selection.css("position : absolute, bottom : 140px");
+    // board.selection.css("position : absolute, bottom : 140px");
     board.selection.prependTo(board.destination);
     // console.log ('move completed')
   },
@@ -80,35 +76,6 @@ var board = {
     magnitude: null,
     // to be defined on board creation
     color: null,
-
-    moveTo: function(position1, position2){
-      if (moveCompleted && isLegalMove){
-        position2.unshift(currentTopDisk(position1));
-      }
-    },
-  },
-
-  peg: {
-    // position to be defined on board creation
-    position: 1,
-    // will be filled with starting configuration at position 1; will be modified during gameplay for each peg
-    currentDisks: [],
-
-    // returns top disk at a given position
-    // currentTopDisk: function(){
-    //   return $('div:first');
-    // },
-
-    // compares magnitude of currentTopDisk of first selection (i.e. disk to be moved) to magnitude of currentTopDisk of second selection (i.e. destination)
-    isLegalMove: function(position1, postion2){
-      if (currentTopDisk(position1) <= currentTopDisk(position2)){
-        return true;
-      } else {
-        // alert to be replaced with something more ui friendly
-        alert("illegal move - please try again")
-        return false;
-      }
-    },
   },
 
   generateGame: function() {
