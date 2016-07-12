@@ -127,24 +127,27 @@ var board = {
     }
   },
 
-  //   clearGame: function(){
-  //     $('.peg div').remove();
-  //     board.diskPositionY = 300;
-  //   }
-  // };
-
+  clearGame: function(){
+    $('.peg').empty();
+    board.diskPositionY = 300;
+  }
 }
+
 
 $(document).on("ready", function(){
 
-  board.numberDisks = prompt("how many disks?");
-  board.numberColors = prompt('how many colors?');
+  // board.numberDisks = prompt("how many disks?");
+  // board.numberColors = prompt('how many colors?');
+  board.numberDisks = 3;
+  board.numberColors = 3;
   board.generateGame();
 
-  // $('select').on('change', function(){
-  //   board.clearGame();
-  //   board.generateGame();
-  // })
+  $('select').on('change', function(){
+    board.numberDisks = 4;
+    board.numberColors = 2;
+    board.clearGame();
+    board.generateGame();
+  })
 
   $('body').on('keyup', function(event){
     board.getMove(event);
