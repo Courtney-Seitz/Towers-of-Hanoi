@@ -1,10 +1,9 @@
 var board = {
 
-  // numberDisks user defined
-  numberDisks: null,
-  // numberColors user defined
-  numberColors: null,
-  // increments with first and second selection, then resets
+  // default values
+  numberDisks: 3,
+  numberColors: 1,
+
   moveCounter: 0,
 
   selection : null,
@@ -103,11 +102,6 @@ var board = {
         } if (a == 2){
           currentColor = 'green';
         }
-        // if (a == 3){
-        //   currentColor = 'brown';
-        // } if (a == 4){
-        //   currentColor = 'orange';
-        // }
 
         var newDisk = board.disk;
         newDisk.magnitude = i;
@@ -127,24 +121,23 @@ var board = {
     }
   },
 
-  //   clearGame: function(){
-  //     $('.peg div').remove();
-  //     board.diskPositionY = 300;
-  //   }
-  // };
+  clearGame: function(){
+    $('.peg div').remove();
+    board.diskPositionY = 300;
+  }
 
 }
 
 $(document).on("ready", function(){
 
-  board.numberDisks = prompt("how many disks?");
-  board.numberColors = prompt('how many colors?');
   board.generateGame();
 
-  // $('select').on('change', function(){
-  //   board.clearGame();
-  //   board.generateGame();
-  // })
+  $('select').on('change', function(){
+    board.clearGame();
+    board.numberDisks = $('#disks').val();
+    board.numberColors = $('#colors').val();
+    board.generateGame();
+  })
 
   $('body').on('keyup', function(event){
     board.getMove(event);
