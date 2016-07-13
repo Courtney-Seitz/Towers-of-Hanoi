@@ -16,6 +16,10 @@ var board = {
 
   solved: false,
 
+  solvedRed : ['red', 'red', 'red'],
+  solvedBlue : ['blue', 'blue', 'blue'],
+  solvedGreen : ['green', 'green', 'green'],
+
   getMove: function(evt){
     if (board.moveCounter == 0) {
       if (event.which == 49){
@@ -106,7 +110,7 @@ var board = {
         newDisk.magnitude = i;
         newDisk.color = currentColor;
 
-        var newDiv = '<div class = \'disk\' id = \'' + newDisk.magnitude + '\'></div>';
+        var newDiv = '<div class = \'disk\' id = \'' + newDisk.magnitude + '\' data-type = \'' + newDisk.color + '\'></div>';
         $('#first').append(newDiv);
         $('#first div:last').css({
           "background-color" : newDisk.color,
@@ -133,17 +137,76 @@ var board = {
         board.solved = true;
       }
     }
-    // if (board.numberColors > 1){
-    //   if (){
-    //     board.solved = true;
-    //   }
-    // }
+    if (board.numberColors > 1){
+      if(board.checkPegSolved() == true){
+        board.solved = true;
+      }
+    }
     if (board.solved == true){
-      console.log('there i solved it');
       $('h5').html("You solved the puzzle!").css({
         "color" : "green",
         "visibility": "visible",
       });
+    }
+  },
+
+  checkPegSolved: function(){
+
+    var firstPegCheck = true;
+    var secondPegCheck = true;
+    var thirdPegCheck = true;
+
+    var firstPeg = [];
+    $('#first div').each(function(){
+      firstPeg.push(this.getAttribute('data-type'));
+    });
+
+    if (firstPeg.length != board.numberDisks && firstPeg.length != 0){
+      firstPegCheck = false;
+      console.log('peg length false');
+    }
+    else {
+      for (i=1; i<firstPeg.length; i++){
+        if (firstPeg[i] != firstPeg[i-1]){
+          firstPegCheck = false;
+          console.log('same color false');
+        }
+      }
+    }
+
+    var secondPeg = [];
+    $('#second div').each(function(){
+      secondPeg.push(this.getAttribute('data-type'));
+    });
+
+    if (secondPeg.length != board.numberDisks && secondPeg.length != 0){
+      secondPegCheck = false;
+    }
+    else {
+      for (i=1; i<secondPeg.length; i++){
+        if (secondPeg[i] != secondPeg[i-1]){
+          secondPegCheck = false;
+        }
+      }
+    }
+
+    var thirdPeg = [];
+    $('#third div').each(function(){
+      thirdPeg.push(this.getAttribute('data-type'));
+    });
+
+    if(thirdPeg.length != board.numberDisks && thirdPeg.length != 0){
+      thirdPegCheck = false;
+    }
+    else {
+      for (i=1; i<thirdPeg.length; i++){
+        if (thirdPeg[i] != thirdPeg[i-1]){
+          thirdPegCheck = false;
+        }
+      }
+    }
+    if (firstPegCheck && secondPegCheck && thirdPegCheck){
+      return true;
     }
   }
 }
@@ -167,5 +230,4 @@ $(document).on("ready", function(){
       board.isSolved();
     }
   });
-
 })
