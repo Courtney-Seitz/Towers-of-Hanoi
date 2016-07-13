@@ -134,8 +134,9 @@ $(document).on("ready", function(){
 
   $('select').on('change', function(){
     board.clearGame();
-    board.numberDisks = $('#disks').val();
-    board.numberColors = $('#colors').val();
+    board.numberDisks = parseInt($('#disks').val());
+    board.numberColors = parseInt($('#colors').val());
+    $('select').blur();
     board.generateGame();
   })
 
