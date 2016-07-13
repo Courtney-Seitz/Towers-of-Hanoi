@@ -57,8 +57,6 @@ var board = {
   },
 
   checkLegalMove: function(){
-    // console.log(board.selectNum);
-    // console.log(board.destNum);
     if ((!board.selectNum)  || (board.selectNum > board.destNum)){
       $('h5').css("visibility",  "visible");
     } else {
@@ -76,15 +74,11 @@ var board = {
   },
 
   disk: {
-    // to be defined on board creation
     magnitude: null,
-    // to be defined on board creation
     color: null,
   },
 
   generateGame: function() {
-    // board.numberDisks = $('#disks').val();
-    // board.numberColors = $('#colors').val();
     var diskWidth = 60;
     var diskLeft = board.numberColors * 20;
     var startPositionY = board.numberDisks * board.numberColors * 30 + 10;
