@@ -133,18 +133,17 @@ var board = {
         board.solved = true;
       }
     }
-    if (board.numberColors > 1){
-      // if (){
-        board.solved = true;
-      // }
-    }
+    // if (board.numberColors > 1){
+    //   if (){
+    //     board.solved = true;
+    //   }
+    // }
     if (board.solved == true){
       console.log('there i solved it');
       $('h5').html("You solved the puzzle!").css({
         "color" : "green",
         "visibility": "visible",
       });
-      $('body').off();
     }
   }
 
@@ -159,16 +158,14 @@ $(document).on("ready", function(){
     board.numberDisks = parseInt($('#disks').val());
     board.numberColors = parseInt($('#colors').val());
     $('select').blur();
-    $('body').on('keydown', function(event){
-      board.getMove(event);
-      board.isSolved();
-    });
     board.generateGame();
   })
 
   $('body').on('keydown', function(event){
-    board.getMove(event);
-    board.isSolved();
+    if (board.solved == false){
+      board.getMove(event);
+      board.isSolved();
+    }
   });
 
 })
