@@ -14,6 +14,8 @@ var board = {
 
   diskPositionY: null,
 
+  solved: false,
+
   getMove: function(evt){
     if (board.moveCounter == 0) {
       if (event.which == 49){
@@ -57,12 +59,13 @@ var board = {
   },
 
   checkLegalMove: function(){
-    // console.log(board.selectNum);
-    // console.log(board.destNum);
     if ((!board.selectNum)  || (board.selectNum > board.destNum)){
       $('h5').css("visibility",  "visible");
     } else {
-      $('h5').css("visibility", "hidden");
+      $('h5').html("Illegal move: please try again").css({
+        "visibility" : "hidden",
+        "color" : "red",
+      });
       board.completeMove();
     }
   },
@@ -76,15 +79,11 @@ var board = {
   },
 
   disk: {
-    // to be defined on board creation
     magnitude: null,
-    // to be defined on board creation
     color: null,
   },
 
   generateGame: function() {
-    // board.numberDisks = $('#disks').val();
-    // board.numberColors = $('#colors').val();
     var diskWidth = 60;
     var diskLeft = board.numberColors * 20;
     var startPositionY = board.numberDisks * board.numberColors * 30 + 10;
@@ -124,6 +123,28 @@ var board = {
   clearGame: function(){
     $('.peg').empty();
     board.diskPositionY = 300;
+    board.solved = false;
+    $('h5').html('').css("visibility", "hidden");
+  },
+
+  isSolved: function(){
+    if (board.numberColors == 1){
+      if ($('#second').children().length == board.numberDisks || $('#third').children().length == board.numberDisks){
+        board.solved = true;
+      }
+    }
+    // if (board.numberColors > 1){
+    //   if (){
+    //     board.solved = true;
+    //   }
+    // }
+    if (board.solved == true){
+      console.log('there i solved it');
+      $('h5').html("You solved the puzzle!").css({
+        "color" : "green",
+        "visibility": "visible",
+      });
+    }
   }
 }
 
@@ -140,8 +161,11 @@ $(document).on("ready", function(){
     board.generateGame();
   })
 
-  $('body').on('keyup', function(event){
-    board.getMove(event);
+  $('body').on('keydown', function(event){
+    if (board.solved == false){
+      board.getMove(event);
+      board.isSolved();
+    }
   });
 
 })
