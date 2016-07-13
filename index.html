@@ -12,13 +12,17 @@
   <h2>Instructions: You many move any disk onto a disk of equal or greater size. <br>For single-color games, the objective is to move the entire set of disks to some other position. <br>For multi-color games, the objective is to "split" the disks into their component colors</h2>
   <h3>Use keys 1, 2, and 3 to select and then move to a position</h3>
   <h4>This version is playable and solvable with up to 3 colors</h4>
+  Colors<select id = "colors">
+    <option value = 1>1</option>
+    <option value = 2>2</option>
+    <option value = 3>3</option>
+  </select>
+  Disks<select id = "disks">
+    <option value = 3>3</option>
+    <option value = 4>4</option>
+    <option value = 5>5</option>
+  </select>
   <h5>Illegal move: please try again</h5>
-  <select id="mySelect">
-  <option>Apple</option>
-  <option>Pear</option>
-  <option>Banana</option>
-  <option>Orange</option>
-</select>
   <div class="board">
     <div class="peg" id="first"></div>
     <div class="peg" id="second"></div>
