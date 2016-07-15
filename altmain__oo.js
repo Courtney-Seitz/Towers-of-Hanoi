@@ -5,6 +5,8 @@ function Board(){
   this.numberDisks = 3;
   this.solved = false;
 
+  this.pegsAt = [];
+
   this.selection = null;
   this.destination = null;
   this.moveCounter = 0;
@@ -13,16 +15,43 @@ function Board(){
 Board.prototype = {
 
   clearGame: function(){
-    // empties the board, resets all board and peg properties (this.solved, this.peg.solvedAt, this.selection, this.destination) and calls generateGame()
+    // empties the board, resets all board and peg properties and calls generateGame()
+    $('peg').empty();
+    selection = null;
+    destination = null;
+    moveCounter = 0;
+    generateGame();
   }
 
   generateGame: function(){
-    // gets values of inputs for disks and colors from 'select'
     // sets numberColors, numberDisks, and numberPegs (if numberColors > 3, numberPegs = numberColors; else numberPegs = 3) based on input values
-    // dynamically creates pegs
-      // for each number from 1 through numberPegs; create peg.position(number)
+    numberColors = $('#colors').val();
+    numberDisks = $('#disks').val();
+    if (numberColors > 3){
+      numberPegs = numberColors;
+    } else {
+      numberPegs = 3;
+    },
+
+    // dynamically creates pegs and appends to board
+      // for each number from 1 through numberPegs; create div peg.position(number) and append to #board
+    for (var i=1; i<=numberPegs, i++){
+      peg = new Peg(i);
+      this.pegsAt.push(peg);
+      var newDiv = '<div class = \'peg\' id = \'position' + peg.position + '\'>';
+      $('#board').append(newDiv);
+    }
+
+  console.log()
+
+var newDiv = '<div class="peg" id="position1">'
     // dynamically creates disks and appends at first peg
       // for each magnitude from 1 through numberDisks; create for each color from 1 through numberColors disk.(magnitude, color)
+
+    for (var i=1; i<=numberDisks, i++){
+
+      for (var k=1; k<=numberColors, k++)
+    }
   }
 
   isSolved: function(){
@@ -49,31 +78,31 @@ Board.prototype = {
     // calls isSolved()
   }
 
-  function Peg(position){
-    this.position = position;
-    this.currentDisksAt = [];
-    this.solvedAt = false;
+}
+
+function Peg(position){
+  this.position = position;
+  this.disksAt = [];
+}
+
+Peg.prototype = {
+
+  currentTopDisk: function(){
+    // returns this.disksAt[0];
   }
 
-  Peg.prototype = {
-
-    currentTopDisk: function(){
-      // returns this.currentDisksAt[0];
-    }
-
-    isSolvedAt: function(){
-      // if (currentDisksAt.length != 0 && currentDisksAt.length != Board.numberPegs); return false
-      // else if (for each index of currentDisksAt, this.color[index] != this.color[index-1]); return false
-      // else this.solvedAt = true
-    }
-
+  isSolvedAt: function(){
+    this.solvedAt = true;
+    if (disksAt.length != 0 && disksAt.length != Board.numberPegs); return false
+    // else if (for each index of disksAt, this.color[index] != this.color[index-1]); return false
+    return this.solvedAt
   }
 
-  function Disk(magnitude, color){
-    this.magnitude = magnitude;
-    this.color = color;
-  }
+}
 
+function Disk(magnitude, color){
+  this.magnitude = magnitude;
+  this.color = color;
 }
 
 $(document).ready(function(){
